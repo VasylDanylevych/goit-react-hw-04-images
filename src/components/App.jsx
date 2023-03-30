@@ -15,25 +15,27 @@ export default function App() {
 	const [totalPage, setTotalPage] = useState(null);
 
 	useEffect(() => {
-		setShowBtn(false);
-		setIsLoading(true);
-		imgApi
-			.getImg(inputValue)
-			.then(data => {
-				if (data.hits.length === 0) throw new Error(Error);
-				const galleryLength = data.hits.length < 12;
-				const totalHits = data.totalHits;
-				setShowBtn(galleryLength ? false : true);
+		if (inputValue) {
+			setShowBtn(false);
+			setIsLoading(true);
+			imgApi
+				.getImg(inputValue)
+				.then(data => {
+					if (data.hits.length === 0) throw new Error(Error);
+					const galleryLength = data.hits.length < 12;
+					const totalHits = data.totalHits;
+					setShowBtn(galleryLength ? false : true);
 
-				setImages(data.hits);
-				setTotalPage(Math.ceil(totalHits / 12));
-			})
-			.catch(error => {
-				console.log(error);
-			})
-			.finally(() => {
-				setIsLoading(false);
-			});
+					setImages(data.hits);
+					setTotalPage(Math.ceil(totalHits / 12));
+				})
+				.catch(error => {
+					console.log(error);
+				})
+				.finally(() => {
+					setIsLoading(false);
+				});
+		}
 	}, [inputValue]);
 
 	const onSubmit = inputValue => {
