@@ -33,5 +33,5 @@ export default function Modal({ closeModal, largeImageURL }) {
 
 Modal.propTypes = {
 	largeImageURL: PropTypes.string.isRequired,
-	toggleModal: PropTypes.func.isRequired,
+	closeModal: PropTypes.func.isRequired,
 };
